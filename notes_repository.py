@@ -1,10 +1,10 @@
 import csv
 
 
-def create_notes(title, body, created_date, modified_date):
+def create_notes(id, title, body, created_date, modified_date):
     with open('notes.csv', 'a') as data:
         writer = csv.DictWriter(data,  ['id', 'Title', 'Body', 'Created_date', 'Modified_date'])
-        row = {'id': generate_index(), 'Title': title, 'Body': body, 'Created_date': created_date, 'Modified_date': modified_date}
+        row = {'id': id, 'Title': title, 'Body': body, 'Created_date': created_date, 'Modified_date': modified_date}
         writer.writerow(row)
 
 
@@ -13,12 +13,10 @@ def read_notes():
         reader = csv.DictReader(data)
         return list(reader)
 
-
-def generate_index():
-    with open('notes.csv', 'r') as data:
+def read_index():
+    with open('curent_id.csv', 'r') as data:
         reader = csv.DictReader(data)
-        row_count = sum(1 for row in data)
-        return row_count
+        return list(reader)
 
 
 def rewrite(data_list):
@@ -29,4 +27,9 @@ def rewrite(data_list):
             writer.writerow(row)
 
 
-
+def rewrite_index(data_list):
+    with open('curent_id.csv', 'w') as data:
+        writer = csv.DictWriter(data, ['id'])
+        writer.writeheader()
+        for row in data_list:
+            writer.writerow(row)
