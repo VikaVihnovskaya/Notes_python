@@ -1,4 +1,4 @@
-from notes_service import create_new_notes, search, get_all_notes, delete_notes, correction_notes
+from notes_service import create_new_notes, search, get_all_notes, delete_notes, correction_notes, search_date
 from notes_repository import read_notes, rewrite
 
 def redactor():
@@ -10,7 +10,7 @@ def redactor():
               3 - Редактировать
               4 - Удалить 
               5 - Вывести список
-              6 - Поиск
+              6 - Поиск по дате
               7 - Выход
      
              ''')
@@ -27,5 +27,7 @@ def redactor():
             rewrite(delete_notes())
         elif str_in == "5":
             get_all_notes()
+        elif str_in == "6":
+            search_date()
         elif str_in == "7":
             break
